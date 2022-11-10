@@ -47,7 +47,7 @@ const FindMovie = () => {
           {movieData.map((item, i) => {
             return (
               <div key={i} className="display-cards">
-                <img src={item.Poster} className="picture" />
+                <img src={item.Poster} className="picture" alt="poster"/>
                 <h4>{item.Title}</h4>
                 <p>Year- {item.Year}</p>
               </div>
