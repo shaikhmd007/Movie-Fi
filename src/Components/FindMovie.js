@@ -6,15 +6,17 @@ const FindMovie = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const URL = `http://www.omdbapi.com/?s=${MovieTitle}&apikey=f2c67f94`;
-      const response = await fetch(URL);
-      const final_Data = await response.json();
-      console.log(final_Data.Search);
-      setMovieData(final_Data.Search);
-    };
-    fetchMovies();
-        // eslint-disable-next-line
+    if (MovieTitle !== undefined) {
+      const fetchMovies = async () => {
+        const URL = `http://www.omdbapi.com/?s=${MovieTitle}&apikey=f2c67f94`;
+        const response = await fetch(URL);
+        const final_Data = await response.json();
+        // console.log(final_Data.Search);
+        setMovieData(final_Data.Search);
+      };
+      fetchMovies();
+    }
+    // eslint-disable-next-line
   }, [isClicked]);
   return (
     <>
@@ -44,15 +46,17 @@ const FindMovie = () => {
           <p>Sharing a few of our favourite movies</p>
         </div>
         <div className="display">
-          {movieData.map((item, i) => {
-            return (
-              <div key={i} className="display-cards">
-                <img src={item.Poster} className="picture" alt="poster"/>
-                <h4>{item.Title}</h4>
-                <p>Year- {item.Year}</p>
-              </div>
-            );
-          })}
+          {movieData !== undefined
+            ? movieData.map((item, i) => {
+                return (
+                  <div key={i} className="display-cards">
+                    <img src={item.Poster} className="picture" alt="poster" />
+                    <h4>{item.Title}</h4>
+                    <p>Year- {item.Year}</p>
+                  </div>
+                );
+              })
+            : false}
         </div>
       </div>
     </>
